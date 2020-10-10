@@ -210,6 +210,8 @@ function createDraggableResizableContainer(edit) {
     };
     const ref = createDraggableResizableContainer(cont_obj);
     ref.innerHTML = content.text;
+    await delay(1333);
+    Array.from(document.querySelectorAll('div')).filter(r=> r.getAttribute('data-qa') == 'article-body-ad').forEach(elm=> {elm.parentElement.innerHTML = ''});
   }
 async function getWapo(){
   const target_url = Array.from(document.head.getElementsByTagName('meta')).filter(r=> r.getAttribute('property') == 'og:url')[0].getAttribute('content');
@@ -218,5 +220,6 @@ async function getWapo(){
   const doc = new DOMParser().parseFromString(text.replace(/\n/g,'').replace(/<script.+?<\/script>/gi, ''),'text/html'); 
   document.body.innerHTML = doc.body.innerHTML;
   return {text: text, target_url: target_url};
+
 }
 createForm()
