@@ -177,6 +177,13 @@ function createDraggableResizableContainer(edit) {
     inlineStyler(cbod,`{background: ${cbod_bg_color}; max-height: ${window.innerHeight * 0.8}px; padding: 8px; overflow-y: auto; border-left: 1px solid #2b2b2b; border-right: 1px solid #2b2b2b;}`);
     mainbod.appendChild(cbod);
   
+    window.onresize = ()=> {
+        let cont_rect = cont.getBoundingClientRect();
+        let edge = 15;
+        inlineStyler(footer,`{grid-template-columns: ${(cont_rect.width - (edge+4))}px ${edge}px;}`);
+        inlineStyler(cont,`{width: ${window.innerWidth > 799 ? window.innerWidth * 0.6 : window.innerWidth * 0.8}px; max-height: ${(window.innerHeight * 0.8)}px;}`);
+    };
+
     let footer = ele('div');
     a(footer, [
       ['dragme', 'true'],
